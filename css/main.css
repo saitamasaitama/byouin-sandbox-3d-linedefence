@@ -1,0 +1,31 @@
+body{
+  margin:0;
+}
+
+canvas{
+	position:absolute;
+	top:0;
+	left:0;
+	min-width:100vw;
+	min-height:100vh;
+
+}
+
+#Debug{
+  position:absolute;
+  left:1vw;
+  top:1vw;
+  z-index:5
+}
+
+#Pad{
+  min-width:2.51cm;
+  min-height:2.51cm;
+  background-color:gray;
+  border-radius:1.25cm;
+  position:absolute;
+  bottom: 0.5cm;
+  left: 0.5cm;
+  z-index:6;
+}
+
