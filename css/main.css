@@ -15,7 +15,47 @@ canvas{
   position:absolute;
   left:1vw;
   top:1vw;
-  z-index:5
+  z-index:5;
+}
+ul{
+	position:absolute;
+	left:0
+	min-height:2cm 
+	bottom:0
+	background-color:gray
+	z-index:7
+}
+#Box{
+	position:absolute;
+	min-height:2.51cm;
+	padding:0.1cm;
+	min-width:100vw;
+	left:0;
+	bottom:0;
+	background-color:#999999;
+	z-index:3;
+}
+#Box > div{
+  position:absolute;
+  min-width:1.9cm;
+  min-height:1.9cm;
+  background-color:gray;
+  border-radius:3vw;
+}
+#Box > .A{
+	left:0cm;
+}
+#Box > .B{
+	left:2cm;
+}
+#Box > .C{
+	left:4cm;
+}
+#Box > .D{
+	left:6cm;
+}
+#Box > .E{
+	left:8cm;
 }
 
 #Pad{

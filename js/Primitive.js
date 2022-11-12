@@ -1,12 +1,18 @@
 class Primitive{
 
-	static Plane(color=0x888888,w=1,h=1,wd=1,hd=1,gm=null){
+	static Plane(color=0x888888,w=1,h=1,wd=1,hd=1){
 	 	const g = new THREE.PlaneGeometry(w,h,wd,hd);
   		const m = new THREE.MeshStandardMaterial({color:color});
   		const plane=new THREE.Mesh(g,m)
   		
-  		plane.rotation.x=DegToRad(-90)
+  		//plane.rotation.x=DegToRad(-90)
   		return plane;
+	}
+	static Box(color=0x444400,w=1,h=1,d=1){
+	  	const g = new THREE.BoxGeometry(w,h,d);
+  		const m = new THREE.MeshStandardMaterial({color:color});
+  		const box=new THREE.Mesh(g,m)
+  		return box;
 	}
   static Sphere(color=0x888888,radius=0.5,w=32,h=16){
   	const g = new THREE.SphereGeometry(radius,w,h);
@@ -121,5 +127,19 @@ static LineLoop(color=0x00FF00,width=3,points=[]){
  	const m=new THREE.MeshStandardMaterial({color:color})
     const g =new THREE.OctahedronGeometry(radius);    
   	return new THREE.Mesh(g,m)
+  }
+  
+  static Cone(color=0xFFFF00,radius=0.5,height=1){
+  	const m=new THREE.MeshStandardMaterial({color:color})
+    const g =new THREE.ConeGeometry(radius,height);    
+  	return new THREE.Mesh(g,m)
+  }
+  
+  static Group(items=[]){
+ 	 const group=new THREE.Group();
+ 	 for(const item of items){
+ 	 	group.add(item);
+ 	 }
+ 	 return group;
   }
 }//end primitive

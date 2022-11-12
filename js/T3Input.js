@@ -43,11 +43,16 @@ class Pad{
 const $Pad=Pad.Zero();
 
 
+
+
 function InputSet(){
    
   $("canvas").on("click",function(e){
   })
-  
+   
+   
+   
+   //左パッドを使う場合
   	$("#Pad").on("touchstart",function(e){
   		$Pad.Start(e)
  	 });

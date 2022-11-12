@@ -24,7 +24,6 @@ class TextQuad{
   		context.fillText("hhh",0,0);
   		
   		const canvasTexture=new THREE.CanvasTexture(canvas[0]);
-  		alert(65)
 	}
 }
 
@@ -39,8 +38,9 @@ class Scene{
     		this.camera = new THREE.PerspectiveCamera(45, 
     window.innerWidth / window.innerHeight,0.1, 1000 );
     		this.renderer.setPixelRatio(window.devicePixelRatio);
-    		this.camera.up = new THREE.Vector3( 0, 1, 0 )
     		
+    		
+    		this.camera.up = new THREE.Vector3( 0, 1, 0 )
     		this.camera.position.y=2.0
     		this.camera.position.z=5
     		
@@ -50,8 +50,8 @@ class Scene{
      	dlight.rotation.x=0.25*Math.PI
     		this.scene.add(light);
     		this.scene.add(dlight);
-    	    this.trackball = new THREE.TrackballControls(this.camera,document.body)
     		
+    		this.trackball=new THREE.TrackballControls(this.camera,document.body)
 	} 
  	static CreateScene(){
     		const result=new Scene();
@@ -105,7 +105,7 @@ class Scene{
 	BeginUpdate(update,fps=30){
 		const delta = 1/fps;
 		update(delta)
-		this.trackball.update()
+	//	this.trackball.update()
 	  	this.renderer.render( this.scene, this.camera );
 	}
 		
