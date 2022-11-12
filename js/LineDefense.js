@@ -51,6 +51,7 @@ class Character{
 		}
 		this.update=update
 		this.pos=0
+		this.model=null
 	}
 	
 	static rand(){
@@ -63,11 +64,24 @@ class Character{
 	Forward(){
 		return this.pos/100
 	}
+	Speed(){
+		return this.status.A /100;
+	}
 	
 	Update(delta){
 		this.update(delta)
+		//Debug.Log(this.model.position.x)
 		this.pos+=this.status.A*delta
 	}
+}
+
+class CharacterAI{
+	static basicAI(){
+	  return function(delta){
+	  
+	  } 
+	}
+
 }
 
 const $TeamA=Team.From([
@@ -86,4 +100,4 @@ const $TeamB=Team.From([
 	Character.Random()
 ])
 
-const $Teams=Teams.From($TeamA,$TeamB)
+const $Teams=Teams.FromAB($TeamA,$TeamB)
