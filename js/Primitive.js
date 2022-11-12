@@ -143,3 +143,20 @@ static LineLoop(color=0x00FF00,width=3,points=[]){
  	 return group;
   }
 }//end primitive
+
+class Model{
+	static EZHuman(color=0xBB0000){
+	  	const sphere=Primitive.Sphere(color,0.2)
+	 	const cone=Primitive.Cone(color,0.25,1.5)
+
+		sphere.position.y=1.5 
+		cone.position.y=0.75
+	  //てるてる坊主
+	  const group=Primitive.Group([
+	  	sphere,
+	  	cone
+	  ])
+	  return group
+	}
+
+}
