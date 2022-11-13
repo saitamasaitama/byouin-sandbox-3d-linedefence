@@ -34,7 +34,8 @@ class Team{
 		  f.push(c.Forward())
 		}
 		f.sort()
-		return f
+		f.reverse()
+		return f[0]
 	}
 }
 

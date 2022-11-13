@@ -146,11 +146,11 @@ static LineLoop(color=0x00FF00,width=3,points=[]){
 
 class Model{
 	static EZHuman(color=0xBB0000){
-	  	const sphere=Primitive.Sphere(color,0.2)
-	 	const cone=Primitive.Cone(color,0.25,1.5)
+	  	const sphere=Primitive.Sphere(color,0.25)
+	 	const cone=Primitive.Cone(color,0.3,1.2)
 
-		sphere.position.y=1.5 
-		cone.position.y=0.75
+		sphere.position.y=1.2 
+		cone.position.y=0.6
 	  //てるてる坊主
 	  const group=Primitive.Group([
 	  	sphere,

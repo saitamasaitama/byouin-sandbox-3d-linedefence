@@ -10,7 +10,9 @@ Box.position.x=length/2
 $Scene.add(Box) 
 
 const humans=[];
+const hu=[];
 for(let i=0;i<$TeamA.characters.length;i++){
+    const c=$TeamA.character[i];
 	const human=Model.EZHuman()
 	
 	const v=Vector3.Forward(0.5)
