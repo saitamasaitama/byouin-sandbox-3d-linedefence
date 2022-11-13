@@ -8,8 +8,8 @@ class Teams{
 	}
 	
 	Update(delta){
-		this.A.Update(delta),
-		this.B.Update(delta)
+		this.A.Update(delta,this.B),
+		this.B.Update(delta,this.A)
 	}
 
 }
@@ -22,9 +22,9 @@ class Team{
 		return new Team(c)
 	}
 	
-	Update(delta){
+	Update(delta,rival){
 		for(const c of this.characters){
-			c.Update(delta);
+			c.Update(delta,rival);
 		}
 	}
 	
@@ -63,26 +63,39 @@ class Character{
 		return new Character()
 	}
 	Forward(){
-		return this.pos/100
+		return this.pos
 	}
 	Speed(){
 		return this.status.A /100;
 	}
 	
-	Update(delta){
+	Update(delta,rival){
 		this.update(delta)
-		//Debug.Log(this.model.position.x)
-		this.pos+=this.status.A*delta
+	
+		if(!this.inRange(rival)){
+			this.pos+=this.Speed()*delta
+		}else{
+		
+		}
+	}
+	
+	Range(rival){
+		const self=this.pos
+		const r=rival.Forward()
+		const range=20-self-r
+		
+		return range
+	}
+	inRange(rival){
+	
+		return this.Range(rival)<1
 	}
 }
 
 class CharacterAI{
 	static basicAI(){
-	  return function(delta){
-	  
-	  } 
+	  return function(delta){} 
 	}
-
 }
 
 const $TeamA=Team.From([
@@ -91,7 +104,7 @@ const $TeamA=Team.From([
 	Character.Random(),
 	Character.Random(),
 	Character.Random()
-])
+]);
 
 const $TeamB=Team.From([
 	Character.Random(),
@@ -99,6 +112,6 @@ const $TeamB=Team.From([
 	Character.Random(),
 	Character.Random(),
 	Character.Random()
-])
+]);
 
 const $Teams=Teams.FromAB($TeamA,$TeamB)
