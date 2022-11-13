@@ -1,3 +1,17 @@
+class Battle{
+	constructor(B){
+		this.Teams=B
+	}
+	static FromTeams(Teams){
+		return new Battle(Teams)
+	} 
+	
+	Update(delta){
+		
+		this.Teams.Update(delta,this.Teams);
+	}
+}
+
 class Teams{
 	constructor(A,B){
 		this.A=A
@@ -7,9 +21,9 @@ class Teams{
 		return new Teams(A,B)
 	}
 	
-	Update(delta){
-		this.A.Update(delta,this.B),
-		this.B.Update(delta,this.A)
+	Update(delta,battle){
+		this.A.Update(delta,this.B,battle),
+		this.B.Update(delta,this.A,battle)
 	}
 
 }
@@ -22,10 +36,18 @@ class Team{
 		return new Team(c)
 	}
 	
-	Update(delta,rival){
+	Update(delta,rival,battle){
 		for(const c of this.characters){
-			c.Update(delta,rival);
+			c.Update(delta,rival, battle);
 		}
+	}
+	
+	Top(){
+		
+		const result=this.characters.sort(function(A,B){
+			return (A.Forward() < B.Forward())?1:-1
+		});
+		return result[0]
 	}
 	
 	Forward(){
@@ -69,7 +91,7 @@ class Character{
 		return this.status.A /100;
 	}
 	
-	Update(delta,rival){
+	Update(delta,rival,battle){
 		this.update(delta)
 	
 		if(!this.inRange(rival)){
@@ -79,16 +101,27 @@ class Character{
 		}
 	}
 	
-	Range(rival){
+	Range(){
+		return this.status.B / 100
+	}
+	
+	Distance(rival){
 		const self=this.pos
 		const r=rival.Forward()
-		const range=20-self-r
+		const range=10-self-r
 		
 		return range
 	}
 	inRange(rival){
 	
-		return this.Range(rival)<1
+		return this.Distance(rival)<Range()
+	}
+}
+
+class Guage{
+	constructor(){
+		this.max=100
+		this.current=0
 	}
 }
 
@@ -114,4 +147,18 @@ const $TeamB=Team.From([
 	Character.Random()
 ]);
 
+
 const $Teams=Teams.FromAB($TeamA,$TeamB)
+const $Battle=Battle.FromTeams($Teams)
+
+//alert($Battle.Teams.Update)
+
+class Mono{
+
+
+}
+
+class View{
+
+
+}
