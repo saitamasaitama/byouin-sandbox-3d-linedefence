@@ -14,16 +14,24 @@ class Attack{
 		//alert(this.From.model.position.x)
 		circle.position.x=this.From.model.position.x
 		circle.position.y=1
-		$Scene.add(circle)
-		
+		/*
+		$Scene.AddAnimation(
+			new Animation(
+				2,
+				circle,
+				function(delta){
+					circle.position.x+=1*delta
+				})
+		*/
 		//alert("resolve")
 	}
 }
 
 class Animation{
 
-	constructor(left,animation){
+	constructor(left,model,animation){
 		this.left=left
+		this.model=model
 	}
 
 	Update(delta){
@@ -46,7 +54,7 @@ class Battle{
 	} 
 	
 	Update(delta){
-		//alert(delta)
+		
 		this.Teams.Update(delta,this)
 		if(0 < this.Attacks.length){
 			const p=this.Attacks.pop()
@@ -225,9 +233,7 @@ const $TeamB=Team.From([
 
 const $Teams=Teams.FromAB($TeamA,$TeamB)
 const $Battle=Battle.FromTeams($Teams)
-
-//alert($Battle.Teams.Update)
-
+　
 class Mono{
 
 

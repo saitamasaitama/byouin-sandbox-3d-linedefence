@@ -44,7 +44,6 @@ for(let i=0;i<6;i++){
 $Scene.camera.position.z=6
 $Scene.camera.position.x=0
 
-
 $Scene.Begin(function(delta){
 	$Battle.Update(delta)
 	 
