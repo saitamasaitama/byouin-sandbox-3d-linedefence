@@ -46,14 +46,15 @@ $Scene.camera.position.x=0
 
 
 $Scene.Begin(function(delta){
-	const movedelta=$Pad.Delta()
-	$Teams.Update(delta)
+	$Battle.Update(delta)
+	 
 	for(const human of $TeamA.characters){
 	    	human.model.position.x =human.Forward()
 	}
 	for(const human of $TeamB.characters){
-	    	human.model.position.x =20-human.Forward()
+	    	human.model.position.x =10-human.Forward()
 	}
-	Debug.Log($TeamA.Forward())
+
 	$Scene.camera.position.x=$TeamA.Forward()
+	
 })

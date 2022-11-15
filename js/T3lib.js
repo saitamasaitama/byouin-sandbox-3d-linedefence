@@ -30,6 +30,7 @@ class TextQuad{
 class Scene{
   constructor(){
 		this.scene=new THREE.Scene();
+		this.animations=[];
 		this.item = [];
 		this.renderer = new THREE.WebGLRenderer();
     		const canvas=$(this.renderer.domElement);
@@ -107,6 +108,10 @@ class Scene{
 		update(delta)
 	//	this.trackball.update()
 	  	this.renderer.render( this.scene, this.camera );
+	}
+	
+	RemoveAnimation(o){
+	  	alert(999)
 	}
 		
 }//Scene end

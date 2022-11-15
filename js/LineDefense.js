@@ -1,14 +1,61 @@
+class Attack{
+	constructor(A,B,power){
+		this.From=A
+		this.To=B
+		this.power=power
+	}
+	static From(A,B,power){
+		return new Attack(A,B,power)
+	}
+	
+	Resolve(){
+	
+		const circle=Primitive.Circle(0xFF0000,1.5)
+		//alert(this.From.model.position.x)
+		circle.position.x=this.From.model.position.x
+		circle.position.y=1
+		$Scene.add(circle)
+		
+		//alert("resolve")
+	}
+}
+
+class Animation{
+
+	constructor(left,animation){
+		this.left=left
+	}
+
+	Update(delta){
+		animation(delta)
+		this.left-=delta
+		if(this.left<0){
+		   $Scene.RemoveAnimation(this)
+		}
+	}
+
+}
+
 class Battle{
 	constructor(B){
 		this.Teams=B
+		this.Attacks=[]
 	}
 	static FromTeams(Teams){
 		return new Battle(Teams)
 	} 
 	
 	Update(delta){
+		//alert(delta)
+		this.Teams.Update(delta,this)
+		if(0 < this.Attacks.length){
+			const p=this.Attacks.pop()
+			p.Resolve()
+		}
 		
-		this.Teams.Update(delta,this.Teams);
+	}
+	Attack(a){
+		this.Attacks.push(a)
 	}
 }
 
@@ -22,7 +69,8 @@ class Teams{
 	}
 	
 	Update(delta,battle){
-		this.A.Update(delta,this.B,battle),
+	  
+		this.A.Update(delta,this.B,battle)
 		this.B.Update(delta,this.A,battle)
 	}
 
@@ -36,10 +84,11 @@ class Team{
 		return new Team(c)
 	}
 	
-	Update(delta,rival,battle){
+	Update(delta,rival,battle){	 
 		for(const c of this.characters){
 			c.Update(delta,rival, battle);
 		}
+	
 	}
 	
 	Top(){
@@ -71,10 +120,13 @@ class Character{
 			C:Character.rand(),		
 			D:Character.rand(),
 			E:Character.rand(),
+			HP:Character.rand(),
 		}
 		this.update=update
 		this.pos=0
 		this.model=null
+		this.casttime=this.CastTime()
+		
 	}
 	
 	static rand(){
@@ -92,17 +144,41 @@ class Character{
 	}
 	
 	Update(delta,rival,battle){
+		
 		this.update(delta)
-	
 		if(!this.inRange(rival)){
-			this.pos+=this.Speed()*delta
+		 	this.pos+=this.Speed()*delta
 		}else{
+			if(this.casttime<0){
+				this.casttime=this.CastTime()
+				battle.Attack(Attack.From(this,rival.Top(),this.Attack()))
+				//alert("cast!")
+			}
+			this.casttime-=delta
 		
 		}
 	}
 	
 	Range(){
 		return this.status.B / 100
+	}
+	
+	CastTime(){
+		return this.status.C / 80
+	}
+	CastTimeUpdate(delta){
+		this.casttime-=delta
+	}
+	ReCastTime(){
+			return this.status.D / 40
+	}
+	
+	Attack(){
+			return this.status.E / 5
+	}
+	
+	HP(){
+			return this.status.HP 
 	}
 	
 	Distance(rival){
@@ -113,8 +189,7 @@ class Character{
 		return range
 	}
 	inRange(rival){
-	
-		return this.Distance(rival)<Range()
+		return this.Distance(rival)<this.Range()
 	}
 }
 
