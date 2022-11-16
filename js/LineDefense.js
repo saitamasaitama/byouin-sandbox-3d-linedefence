@@ -10,39 +10,24 @@ class Attack{
 	
 	Resolve(){
 	
-		const circle=Primitive.Circle(0xFF0000,1.5)
+		const circle=Primitive.Circle(0xFFFF00,0.9)
 		//alert(this.From.model.position.x)
 		circle.position.x=this.From.model.position.x
 		circle.position.y=1
-		/*
-		$Scene.AddAnimation(
-			new Animation(
+		
+		
+	    const animation=new Animation(
 				2,
 				circle,
-				function(delta){
-					circle.position.x+=1*delta
-				})
-		*/
-		//alert("resolve")
+				function(delta,model){
+				 	model.position.x+=1*delta
+				}
+		)
+		alert($Scene.addAnim)
+		$Scene.AddAnim(animation)
 	}
 }
 
-class Animation{
-
-	constructor(left,model,animation){
-		this.left=left
-		this.model=model
-	}
-
-	Update(delta){
-		animation(delta)
-		this.left-=delta
-		if(this.left<0){
-		   $Scene.RemoveAnimation(this)
-		}
-	}
-
-}
 
 class Battle{
 	constructor(B){
@@ -58,6 +43,7 @@ class Battle{
 		this.Teams.Update(delta,this)
 		if(0 < this.Attacks.length){
 			const p=this.Attacks.pop()
+			
 			p.Resolve()
 		}
 		
@@ -160,7 +146,7 @@ class Character{
 			if(this.casttime<0){
 				this.casttime=this.CastTime()
 				battle.Attack(Attack.From(this,rival.Top(),this.Attack()))
-				//alert("cast!")
+				
 			}
 			this.casttime-=delta
 		
