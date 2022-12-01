@@ -3,6 +3,32 @@ const $Scene=Scene.CreateScene()
 
 InputSet()
 
+
+var audioCtx = new AudioContext();
+
+window.AudioContext = window.AudioContext || window.webkitAudioContext;
+const ctx = new AudioContext();
+
+const audioElement = document.querySelector("audio");
+// Web Audio API内で使える形に変換
+const track = ctx.createMediaElementSource(audioElement);
+
+document.querySelector("#play").addEventListener("click", () => {
+  if (ctx.state === "suspended") {
+    ctx.resume();
+  }
+  // 出力につなげる
+  track.connect(ctx.destination);
+  audioElement.play();
+});
+
+// audioElementを一時停止する
+document.querySelector("#pause").addEventListener("click", () => {
+  audioElement.pause();
+});
+
+//$Scene.add(Primitive.Island())
+/*
 const length=10
 const Box=Primitive.Box(0xCCCC66,length,0.1,2)
 Box.position.x=length/2
@@ -43,8 +69,10 @@ for(let i=0;i<6;i++){
 
 $Scene.camera.position.z=6
 $Scene.camera.position.x=0
-
+*/
 $Scene.Begin(function(delta){
+
+/*
 	$Battle.Update(delta)
 	 
 	for(const human of $TeamA.characters){
@@ -55,5 +83,7 @@ $Scene.Begin(function(delta){
 	}
 
 	$Scene.camera.position.x=$TeamA.Forward()
-	
+*/
+
+
 })

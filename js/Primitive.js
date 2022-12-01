@@ -142,6 +142,21 @@ static LineLoop(color=0x00FF00,width=3,points=[]){
  	 }
  	 return group;
   }
+  
+  static Island(){ 
+ 
+    const m=new THREE.MeshBasicMaterial({color:0x888888});
+    const g = new THREE.Geometry();
+    for(let i=0;i<10;i++){
+      
+    }
+    /*
+    for(let i=1;i<cut;i++){
+       g.faces.push(new THREE.Face3( 0, i+1, i));
+    }
+    */
+  	return new THREE.Mesh(g,m)
+  }
 }//end primitive
 
 class Model{

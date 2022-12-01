@@ -62,7 +62,11 @@ class Scene{
     add(o){
     		this.scene.add(o);
     		return this;
-    }  
+    } 
+    
+    remove(o){
+    		this.scene.remove(o)
+    } 
     
     Begin(update,fps=30){
     		
@@ -76,10 +80,25 @@ class Scene{
 	BeginUpdate(update,fps=30){
 		const delta = 1/fps;
 		update(delta)
+		for(const animation of this.animations){
+			animation.Update(delta)
+			if(animation.IsEnd()){
+				this.remove(animation.obj)
+				
+				//this.animations.remove(animation)
+			}
+		}
+		
+		
+			
+		
+		
 	//	this.trackball.update()
 	  	this.renderer.render( this.scene, this.camera );
 	}
 	AddAnimation(a){
+		Debug.Log(a.obj)
+		this.add(a.obj)
 		this.animations.push(a)
 	}
 	RemoveAnimation(o){
@@ -87,3 +106,26 @@ class Scene{
 	}
 		
 }//Scene end
+
+class Animation{
+
+	constructor(left,obj,animation){
+		this.frame=0
+		this.left=left;
+		this.obj=obj;
+		this.animation=animation;
+	}
+	
+	Update(delta){ 
+	    Debug.Log(this.left+":"+this.frame)
+		this.animation(delta,this.obj) 
+		this.left-=delta
+		this.frame++
+		Debug.Log(this.left+":"+this.frame)
+	}
+	
+	
+	IsEnd(){
+		return this.left < 0
+	}
+}

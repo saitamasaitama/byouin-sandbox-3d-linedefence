@@ -9,22 +9,25 @@ class Attack{
 	}
 	
 	Resolve(){
-	
-		const circle=Primitive.Circle(0xFFFF00,0.9)
+		const circle=Primitive.Circle(0xFFFF00,0.1)
 		//alert(this.From.model.position.x)
 		circle.position.x=this.From.model.position.x
 		circle.position.y=1
+		circle.position.z=this.From.model.position.z
 		
-		
+	
 	    const animation=new Animation(
 				2,
 				circle,
 				function(delta,model){
+				
 				 	model.position.x+=1*delta
+				    model.scale.x*=1+(0.5*delta)
+				    model.scale.y*=1+(0.5*delta)
+
 				}
 		)
-		alert($Scene.addAnim)
-		$Scene.AddAnim(animation)
+		$Scene.AddAnimation(animation)
 	}
 }
 
